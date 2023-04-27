@@ -25,10 +25,10 @@ if uploaded_file is not None:
     df2 = df[df[selected_option] == selected_option2]
     
     st.write(df2.head())
-    df_sub = df[]
+#     df_sub = df[]
     
-    unique_1 = df['Delivery_Associate'].unique()
-    unique_2 = df['Dropoff_Location'].unique()
+#     unique_1 = df['Delivery_Associate'].unique()
+#     unique_2 = df['Dropoff_Location'].unique()
     
 #     df_group = df.group_by('Delivery_Associate')
 #     st.write(df_group.head())
