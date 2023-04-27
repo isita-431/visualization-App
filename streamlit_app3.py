@@ -21,7 +21,7 @@ if uploaded_file is not None:
     
     options = ["Delivery_Associate", "Dropoff_Location"]
     selected_option = st.selectbox("Select an option", options)
-    selected_option2 = st.selectbox("Select an option", df["selected_option"].unique())
+    selected_option2 = st.selectbox("Select an option", df[selected_option].unique())
     df2 = df[df[selected_option] == selected_option2]
     
     st.write(df2.head())
