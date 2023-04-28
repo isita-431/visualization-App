@@ -8,7 +8,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-
+import plotly.graph_objs as go
 
 # Upload Excel file
 uploaded_file = st.file_uploader("Choose a file", type=["xlsx", "xls"])
@@ -32,18 +32,41 @@ if uploaded_file is not None:
     df2['latitude'] = df2['latitude'].str.replace('°', '').str.strip().astype(float)
     df2['longitude'] = df2['longitude'].str.replace('°', '').str.strip().astype(float)
     
-    fig = px.scatter_mapbox(df2,
-                        lat='latitude',
-                        lon= 'longitude',
-                        hover_name=df2['Distance_between_Actual_and_Planned']+'\n'+df2['Dropoff_Location'],
-                        zoom=2)
+#     fig = px.scatter_mapbox(df2,
+#                         lat='latitude',
+#                         lon= 'longitude',
+#                         hover_name=df2['Distance_between_Actual_and_Planned']+'\n'+df2['Dropoff_Location'],
+#                         zoom=2)
 
-    # Customize plot as desired
-    fig.update_layout(title="World Map with Latitude and Longitude Markers")
+#     # Customize plot as desired
+#     fig.update_layout(title="World Map with Latitude and Longitude Markers")
     
-    fig.show()
+#     fig.show()
 
-    # Display plot in Streamlit app
+#     # Display plot in Streamlit app
+#     st.plotly_chart(fig)
+    
+    # create a Plotly scatter plot
+    fig = go.Figure(go.Scattergeo(
+        lon = df2['Longitude'],
+        lat = df2['Latitude'],
+        mode = 'markers',
+        
+    ))
+
+    # set the map layout and configuration
+    fig.update_layout(
+        geo_scope='usa',  # set the scope of the map to USA
+        geo=dict(
+            showland=True,
+            landcolor='rgb(243, 243, 243)',
+            countrycolor='rgb(204, 204, 204)'
+        ),
+        height=600)
+    
+    fig.update_layout(title="World Map with Latitude and Longitude Markers")
+    # show the plot
+    fig.show()
     st.plotly_chart(fig)
 #     df_sub = df[]
     
