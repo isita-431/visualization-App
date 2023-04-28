@@ -27,7 +27,7 @@ if uploaded_file is not None:
     
     st.write(df2.head())
 
-    lat,long = df2['Actual_Location'].split(',')
+    lat,long = df2['Actual_Location'].lamdba(x: x.split(','))
     
     fig = px.scatter_mapbox(df2,
                         lat=lat,
