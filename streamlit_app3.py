@@ -27,11 +27,12 @@ if uploaded_file is not None:
     
     st.write(df2.head())
 
-    lat,long = df2['Actual_Location'].map(lambda x: x.split(','))
+#     lat,long = df2['Actual_Location'].map(lambda x: x.split(','))
+    df2[['latitude', 'longitude']] = df2['Actual_Location'].str.split(',', expand=True)
     
     fig = px.scatter_mapbox(df2,
-                        lat=lat,
-                        lon=long,
+                        lat='latitude',
+                        lon= 'longitude',
                         hover_name=df2['Distance_between_Actual_and_Planned']+'\n'+df2['Dropoff_Location'],
                         zoom=2)
 
