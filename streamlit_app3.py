@@ -40,6 +40,8 @@ if uploaded_file is not None:
 
     # Customize plot as desired
     fig.update_layout(title="World Map with Latitude and Longitude Markers")
+    
+    fig.show()
 
     # Display plot in Streamlit app
     st.plotly_chart(fig)
