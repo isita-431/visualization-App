@@ -29,8 +29,8 @@ if uploaded_file is not None:
 
 #     lat,long = df2['Actual_Location'].map(lambda x: x.split(','))
     df2[['latitude', 'longitude']] = df2['Actual_Location'].str.split(',', expand=True)
-    df['latitude'] = df['latitude'].str.replace('°', '').strip().apply(int)
-    df['longitude'] = df['longitude'].str.replace('°', '').strip().apply(int)
+    df2['latitude'] = df2['latitude'].str.replace('°', '').strip().apply(int)
+    df2['longitude'] = df2['longitude'].str.replace('°', '').strip().apply(int)
     
     fig = px.scatter_mapbox(df2,
                         lat='latitude',
