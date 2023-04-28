@@ -56,8 +56,9 @@ if uploaded_file is not None:
 
     # set the map layout and configuration
     fig.update_layout(
-        geo_scope='california',  # set the scope of the map to USA
+        geo_scope='usa-california',  # set the scope of the map to USA
         geo=dict(
+            scope='usa-california',
             showland=True,
             landcolor='rgb(243, 243, 243)',
             countrycolor='rgb(204, 204, 204)'
