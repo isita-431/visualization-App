@@ -49,20 +49,20 @@ if uploaded_file is not None:
 
 #     # Display plot in Streamlit app
 #     st.plotly_chart(fig)
-    fig = make_subplots(rows=1, cols=2)
+#     fig = make_subplots(rows=1, cols=2)
     
     # create a Plotly scatter plot
     st.write(' Actual location ')
     df2['data']= df2['Distance_between_Actual_and_Planned']+'\n'+df2['Dropoff_Location']
-    fig.add_trace(px.scatter_mapbox(df2, lat='latitude', lon='longitude',text = df2['data'] ,zoom=6, height=500,size_max = 20, 
-                                    color_discrete_sequence=['red']), row=1, col=1)
-#     fig.update_layout(mapbox_style='open-street-map', mapbox_zoom=6,
-#                   mapbox_center={'lat': 37.7749, 'lon': -122.4194})
+    fig = px.scatter_mapbox(df2, lat='latitude', lon='longitude',text = df2['data'] ,zoom=6, height=500,size_max = 20, 
+                                    color_discrete_sequence=['red'])
+    fig.update_layout(mapbox_style='open-street-map', mapbox_zoom=6,
+                  mapbox_center={'lat': 37.7749, 'lon': -122.4194})
    
 #     df2['data']= df2['Distance_between_Actual_and_Planned']+'\n'+df2['Dropoff_Location']
-    fig.add_trace(px.scatter_mapbox(df2, lat='latitude1', lon='longitude1',text = df2['data'] ,zoom=6, height=500,size_max = 20, 
-                                    color_discrete_sequence=['blue']), row=1, col=2)
-    fig.update_layout(mapbox_style='open-street-map', mapbox_zoom=6,
+    fig2 = px.scatter_mapbox(df2, lat='latitude1', lon='longitude1',text = df2['data'] ,zoom=6, height=500,size_max = 20, 
+                                    color_discrete_sequence=['blue'])
+    fig2.update_layout(mapbox_style='open-street-map', mapbox_zoom=6,
                   mapbox_center={'lat': 37.7749, 'lon': -122.4194})
 #     fig = go.Figure(go.Scattergeo(
 #         lon = df2['longitude'],
@@ -86,9 +86,9 @@ if uploaded_file is not None:
 #     # show the plot
     fig.show()
     st.plotly_chart(fig)
-#     st.write(' Planned location ')
-#     fig2.show()
-#     st.plotly_chart(fig2)
+    st.write(' Planned location ')
+    fig2.show()
+    st.plotly_chart(fig2)
 #     df_sub = df[]
     
 #     unique_1 = df['Delivery_Associate'].unique()
