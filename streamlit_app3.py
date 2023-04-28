@@ -7,6 +7,7 @@
 
 import streamlit as st
 import pandas as pd
+import plotly.express as px
 
 
 # Upload Excel file
@@ -25,6 +26,20 @@ if uploaded_file is not None:
     df2 = df[df[selected_option] == selected_option2]
     
     st.write(df2.head())
+
+    lat,long = df2['Actual_Location'].split(',')
+    
+    fig = px.scatter_mapbox(df2,
+                        lat=lat,
+                        lon=long,
+                        hover_name=df2['Distance_between_Actual_and_Planned']+'\n'+df2['Dropoff_Location'],
+                        zoom=2)
+
+    # Customize plot as desired
+    fig.update_layout(title="World Map with Latitude and Longitude Markers")
+
+    # Display plot in Streamlit app
+    st.plotly_chart(fig)
 #     df_sub = df[]
     
 #     unique_1 = df['Delivery_Associate'].unique()
