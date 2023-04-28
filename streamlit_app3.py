@@ -17,7 +17,7 @@ uploaded_file = st.file_uploader("Choose a file", type=["xlsx", "xls"])
 # Read Excel file and display first few rows
 if uploaded_file is not None:
     df = pd.read_excel(uploaded_file)
-    st.write(df.head())
+#     st.write(df.head())
     
     st.write('Filter by : ')
     
@@ -26,16 +26,16 @@ if uploaded_file is not None:
     selected_option2 = st.selectbox("Select an option", df[selected_option].unique())
     df2 = df[df[selected_option] == selected_option2]
     
-    st.write(df2.head())
+#     st.write(df2.head())
 
 #     lat,long = df2['Actual_Location'].map(lambda x: x.split(','))
     df2[['latitude', 'longitude']] = df2['Actual_Location'].str.split(',', expand=True)
     df2['latitude'] = df2['latitude'].str.replace('°', '').str.strip().astype(float)
     df2['longitude'] = df2['longitude'].str.replace('°', '').str.strip().astype(float)
     
-    df2[['latitude1', 'longitude1']] = df2['Planned_Location'].str.split(',', expand=True)
-    df2['latitude1'] = df2['latitude1'].str.replace('°', '').str.strip().astype(float)
-    df2['longitude1'] = df2['longitude1'].str.replace('°', '').str.strip().astype(float)
+#     df2[['latitude1', 'longitude1']] = df2['Planned_Location'].str.split(',', expand=True)
+#     df2['latitude1'] = df2['latitude1'].str.replace('°', '').str.strip().astype(float)
+#     df2['longitude1'] = df2['longitude1'].str.replace('°', '').str.strip().astype(float)
 #     fig = px.scatter_mapbox(df2,
 #                         lat='latitude',
 #                         lon= 'longitude',
@@ -60,10 +60,10 @@ if uploaded_file is not None:
                   mapbox_center={'lat': 37.7749, 'lon': -122.4194})
    
 #     df2['data']= df2['Distance_between_Actual_and_Planned']+'\n'+df2['Dropoff_Location']
-    fig2 = px.scatter_mapbox(df2, lat='latitude1', lon='longitude1',text = df2['data'] ,zoom=6, height=500,size_max = 20, 
-                                    color_discrete_sequence=['blue'])
-    fig2.update_layout(mapbox_style='open-street-map', mapbox_zoom=6,
-                  mapbox_center={'lat': 37.7749, 'lon': -122.4194})
+#     fig2 = px.scatter_mapbox(df2, lat='latitude1', lon='longitude1',text = df2['data'] ,zoom=6, height=500,size_max = 20, 
+#                                     color_discrete_sequence=['blue'])
+#     fig2.update_layout(mapbox_style='open-street-map', mapbox_zoom=6,
+#                   mapbox_center={'lat': 37.7749, 'lon': -122.4194})
 #     fig = go.Figure(go.Scattergeo(
 #         lon = df2['longitude'],
 #         lat = df2['latitude'],
@@ -86,9 +86,9 @@ if uploaded_file is not None:
 #     # show the plot
     fig.show()
     st.plotly_chart(fig)
-    st.write(' Planned location ')
-    fig2.show()
-    st.plotly_chart(fig2)
+#     st.write(' Planned location ')
+#     fig2.show()
+#     st.plotly_chart(fig2)
 #     df_sub = df[]
     
 #     unique_1 = df['Delivery_Associate'].unique()
