@@ -48,7 +48,7 @@ if uploaded_file is not None:
     
     # create a Plotly scatter plot
     df2['data']= df2['Distance_between_Actual_and_Planned']+'\n'+df2['Dropoff_Location']
-    fig = px.scatter_mapbox(df2, lat='latitude', lon='longitude',text = df2['data'] ,zoom=6, height=500,size_max = 10)
+    fig = px.scatter_mapbox(df2, lat='latitude', lon='longitude',text = df2['data'] ,zoom=6, height=500,size_max = 10, color_discrete_sequence=['red'], size=10)
     fig.update_layout(mapbox_style='open-street-map', mapbox_zoom=6,
                   mapbox_center={'lat': 37.7749, 'lon': -122.4194})
 #     fig = go.Figure(go.Scattergeo(
