@@ -47,26 +47,30 @@ if uploaded_file is not None:
 #     st.plotly_chart(fig)
     
     # create a Plotly scatter plot
-    fig = go.Figure(go.Scattergeo(
-        lon = df2['longitude'],
-        lat = df2['latitude'],
-        mode = 'markers',
+    df2['data']= df2['Distance_between_Actual_and_Planned']+'\n'+df2['Dropoff_Location']
+    fig = px.scatter_mapbox(df2, lat='latitude', lon='longitude',text = df2['data'] ,zoom=6, height=500,size_max = 10)
+    fig.update_layout(mapbox_style='open-street-map', mapbox_zoom=6,
+                  mapbox_center={'lat': 37.7749, 'lon': -122.4194})
+#     fig = go.Figure(go.Scattergeo(
+#         lon = df2['longitude'],
+#         lat = df2['latitude'],
+#         mode = 'markers',
         
-    ))
+#     ))
 
-    # set the map layout and configuration
-    fig.update_layout(
-        geo_scope='usa-california',  # set the scope of the map to USA
-        geo=dict(
-            scope='usa-california',
-            showland=True,
-            landcolor='rgb(243, 243, 243)',
-            countrycolor='rgb(204, 204, 204)'
-        ),
-        height=600)
+#     # set the map layout and configuration
+#     fig.update_layout(
+#         geo_scope='usa-california',  # set the scope of the map to USA
+#         geo=dict(
+#             scope='usa-california',
+#             showland=True,
+#             landcolor='rgb(243, 243, 243)',
+#             countrycolor='rgb(204, 204, 204)'
+#         ),
+#         height=600)
     
-    fig.update_layout(title="World Map with Latitude and Longitude Markers")
-    # show the plot
+#     fig.update_layout(title="World Map with Latitude and Longitude Markers")
+#     # show the plot
     fig.show()
     st.plotly_chart(fig)
 #     df_sub = df[]
