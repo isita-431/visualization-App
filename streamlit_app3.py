@@ -48,8 +48,8 @@ if uploaded_file is not None:
     
     # create a Plotly scatter plot
     fig = go.Figure(go.Scattergeo(
-        lon = df2['Longitude'],
-        lat = df2['Latitude'],
+        lon = df2['longitude'],
+        lat = df2['latitude'],
         mode = 'markers',
         
     ))
