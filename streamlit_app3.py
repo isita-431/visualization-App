@@ -24,6 +24,7 @@ if uploaded_file is not None:
     options = ["Delivery_Associate", "Dropoff_Location","All"]
     selected_option = st.selectbox("Select an option", options)
     if selected_option == 'All':
+        df2= df
         df2[['latitude', 'longitude']] = df2['Actual_Location'].str.split(',', expand=True)
         df2['latitude'] = df2['latitude'].str.replace('°', '').str.strip().astype(float)
         df2['longitude'] = df2['longitude'].str.replace('°', '').str.strip().astype(float)
