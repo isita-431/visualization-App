@@ -42,7 +42,7 @@ if uploaded_file is not None:
         # Get the selected range
         start_value = range_slider[0]
         end_value = range_slider[1]
-        df2 = df[df['week'] >= start_value & df['week'] <= end_value]
+        df2 = df[df['Week'] >= start_value & df['Week'] <= end_value]
         df2[['latitude', 'longitude']] = df2['Actual_Location'].str.split(',', expand=True)
         df2['latitude'] = df2['latitude'].str.replace('°', '').str.strip().astype(float)
         df2['longitude'] = df2['longitude'].str.replace('°', '').str.strip().astype(float)
