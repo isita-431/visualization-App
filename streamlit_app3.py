@@ -21,43 +21,57 @@ if uploaded_file is not None:
     
     st.write('Filter by : ')
     
-    options = ["Delivery_Associate", "Dropoff_Location"]
+    options = ["Delivery_Associate", "Dropoff_Location","All"]
     selected_option = st.selectbox("Select an option", options)
-    selected_option2 = st.selectbox("Select an option", df[selected_option].unique())
-    df2 = df[df[selected_option] == selected_option2]
-    
-#     st.write(df2.head())
+    if selected_option == 'All':
+        df2[['latitude', 'longitude']] = df2['Actual_Location'].str.split(',', expand=True)
+        df2['latitude'] = df2['latitude'].str.replace('°', '').str.strip().astype(float)
+        df2['longitude'] = df2['longitude'].str.replace('°', '').str.strip().astype(float)
+        st.write(' Actual location ')
+        df2['data']= df2['Distance_between_Actual_and_Planned']+'\n'+df2['Dropoff_Location']
+        fig = px.scatter_mapbox(df2, lat='latitude', lon='longitude',hover_data={'latitude': False, 'longitude': False},text = df2['data'] ,zoom=6, height=500,size_max = 20, 
+                                        color_discrete_sequence=['red'])
+        fig.update_layout(mapbox_style='open-street-map', mapbox_zoom=6,
+                      mapbox_center={'lat': 37.7749, 'lon': -122.4194})
+        fig.show()
+        st.plotly_chart(fig)
+        
+    else:
+        selected_option2 = st.selectbox("Select an option", df[selected_option].unique())
+        df2 = df[df[selected_option] == selected_option2]
 
-#     lat,long = df2['Actual_Location'].map(lambda x: x.split(','))
-    df2[['latitude', 'longitude']] = df2['Actual_Location'].str.split(',', expand=True)
-    df2['latitude'] = df2['latitude'].str.replace('°', '').str.strip().astype(float)
-    df2['longitude'] = df2['longitude'].str.replace('°', '').str.strip().astype(float)
-    
-#     df2[['latitude1', 'longitude1']] = df2['Planned_Location'].str.split(',', expand=True)
-#     df2['latitude1'] = df2['latitude1'].str.replace('°', '').str.strip().astype(float)
-#     df2['longitude1'] = df2['longitude1'].str.replace('°', '').str.strip().astype(float)
-#     fig = px.scatter_mapbox(df2,
-#                         lat='latitude',
-#                         lon= 'longitude',
-#                         hover_name=df2['Distance_between_Actual_and_Planned']+'\n'+df2['Dropoff_Location'],
-#                         zoom=2)
+    #     st.write(df2.head())
 
-#     # Customize plot as desired
-#     fig.update_layout(title="World Map with Latitude and Longitude Markers")
-    
-#     fig.show()
+    #     lat,long = df2['Actual_Location'].map(lambda x: x.split(','))
+        df2[['latitude', 'longitude']] = df2['Actual_Location'].str.split(',', expand=True)
+        df2['latitude'] = df2['latitude'].str.replace('°', '').str.strip().astype(float)
+        df2['longitude'] = df2['longitude'].str.replace('°', '').str.strip().astype(float)
+        
+    #     df2[['latitude1', 'longitude1']] = df2['Planned_Location'].str.split(',', expand=True)
+    #     df2['latitude1'] = df2['latitude1'].str.replace('°', '').str.strip().astype(float)
+    #     df2['longitude1'] = df2['longitude1'].str.replace('°', '').str.strip().astype(float)
+    #     fig = px.scatter_mapbox(df2,
+    #                         lat='latitude',
+    #                         lon= 'longitude',
+    #                         hover_name=df2['Distance_between_Actual_and_Planned']+'\n'+df2['Dropoff_Location'],
+    #                         zoom=2)
 
-#     # Display plot in Streamlit app
-#     st.plotly_chart(fig)
-#     fig = make_subplots(rows=1, cols=2)
-    
-    # create a Plotly scatter plot
-    st.write(' Actual location ')
-    df2['data']= df2['Distance_between_Actual_and_Planned']+'\n'+df2['Dropoff_Location']
-    fig = px.scatter_mapbox(df2, lat='latitude', lon='longitude',hover_data={'latitude': False, 'longitude': False},text = df2['data'] ,zoom=6, height=500,size_max = 20, 
-                                    color_discrete_sequence=['red'])
-    fig.update_layout(mapbox_style='open-street-map', mapbox_zoom=6,
-                  mapbox_center={'lat': 37.7749, 'lon': -122.4194})
+    #     # Customize plot as desired
+    #     fig.update_layout(title="World Map with Latitude and Longitude Markers")
+
+    #     fig.show()
+
+    #     # Display plot in Streamlit app
+    #     st.plotly_chart(fig)
+    #     fig = make_subplots(rows=1, cols=2)
+
+        # create a Plotly scatter plot
+        st.write(' Actual location ')
+        df2['data']= df2['Distance_between_Actual_and_Planned']+'\n'+df2['Dropoff_Location']
+        fig = px.scatter_mapbox(df2, lat='latitude', lon='longitude',hover_data={'latitude': False, 'longitude': False},text = df2['data'] ,zoom=6, height=500,size_max = 20, 
+                                        color_discrete_sequence=['red'])
+        fig.update_layout(mapbox_style='open-street-map', mapbox_zoom=6,
+                      mapbox_center={'lat': 37.7749, 'lon': -122.4194})
    
 #     df2['data']= df2['Distance_between_Actual_and_Planned']+'\n'+df2['Dropoff_Location']
 #     fig2 = px.scatter_mapbox(df2, lat='latitude1', lon='longitude1',text = df2['data'] ,zoom=6, height=500,size_max = 20, 
@@ -84,8 +98,8 @@ if uploaded_file is not None:
     
 #     fig.update_layout(title="World Map with Latitude and Longitude Markers")
 #     # show the plot
-    fig.show()
-    st.plotly_chart(fig)
+        fig.show()
+        st.plotly_chart(fig)
 #     st.write(' Planned location ')
 #     fig2.show()
 #     st.plotly_chart(fig2)
