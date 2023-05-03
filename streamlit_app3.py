@@ -36,7 +36,7 @@ if uploaded_file is not None:
                       mapbox_center={'lat': 37.7749, 'lon': -122.4194})
         fig.show()
         st.plotly_chart(fig)
-    elif selected_option == "Week":
+    elif selected_option == "week":
         range_slider = st.slider('Select a range of week', 10.0, 17.0, (10.0,17.0), 1.0)
 
         # Get the selected range
