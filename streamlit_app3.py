@@ -37,7 +37,7 @@ if uploaded_file is not None:
         fig.show()
         st.plotly_chart(fig)
     elif selected_option == "week":
-        range_slider = st.slider('Select a range of week, 10.0, 17.0, (10.0,17.0), 1.0)
+        range_slider = st.slider('Select a range of week', 10.0, 17.0, (10.0,17.0), 1.0)
 
         # Get the selected range
         start_value = range_slider[0]
