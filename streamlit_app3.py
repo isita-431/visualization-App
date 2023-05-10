@@ -1,10 +1,7 @@
 # import streamlit as st
 # import pandas as pd
-
 # uploaded_file = st.file_uploader("Upload Excel file", type=["xlsx", "xls"])
-
 # st.write(pd.read_excel(uploaded_file).head())
-
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -31,7 +28,7 @@ if uploaded_file is not None:
         st.write(' Actual location ')
         df2['data']=df2['Delivery_Associate'] + '   ' + df2['Distance_between_Actual_and_Planned']+'   ' + df2['Dropoff_Location'] + '     ' + df2['Service_Area']  
         fig = px.scatter_mapbox(df2, lat='latitude', lon='longitude',hover_data={'latitude': False, 'longitude': False},text = df2['data'] ,zoom=6, height=500,size_max = 20, 
-                                        colour = df2["Dropoff_Location"])
+                                        color='Dropoff_Location')
 #       # color_discrete_sequence=['red']
         fig.update_layout(mapbox_style='open-street-map', mapbox_zoom=6,
                       mapbox_center={'lat': 37.7749, 'lon': -122.4194})
